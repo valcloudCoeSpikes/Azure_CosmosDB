@@ -1,0 +1,49 @@
+﻿@model IEnumerable<CosmosDemo.Models.ProjectTask>
+
+@{
+    ViewData["Title"] = "Tasks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Tasks</h2>
+
+<p>
+    @*<a asp-action="CreateTask">Create New</a>*@
+    @Html.ActionLink("Create New", "CreateTask", new { id=@ViewBag.Id })
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssignedTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssignedTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditTask", new { id = @ViewBag.Id, taskId = item.TaskId }) |
+                @Html.ActionLink("Details", "DetailsTask", new { id = @ViewBag.Id, taskId = item.TaskId }) |
+                @Html.ActionLink("Delete", "DeleteTask", new { id = @ViewBag.Id, taskId = item.TaskId })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
